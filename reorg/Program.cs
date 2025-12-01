@@ -12,12 +12,12 @@ string[] videoExtensions = { ".mp4", ".avi", ".mkv", ".mov", ".wmv", ".flv", ".w
 
 
 // NO PATH SUPPLIED, EXIT
-if (args.Count() < 2) {
+if (args.Count() == 0) {
     Console.WriteLine("nothing supplied, exit");
     return;
 }
 
-foreach (string item in args.Skip(1))
+foreach (string item in args)
 {
     if (Path.Exists(item)) {
         Doreorg(item);
@@ -63,7 +63,7 @@ void Doreorg(string folderbase)
             if (!videoExtensions.Contains(fileinfo.Extension))
             {
                 File.Delete(fileinfo.FullName);
-                Console.WriteLine($"del   : {fileinfo.FullName}");
+                Console.WriteLine($"del   : {fileinfo.Name}");
             }
             // VIDEO FILE > MOVE/RENAME TO FOLDER NAME + EXTENSION
             else
@@ -72,7 +72,7 @@ void Doreorg(string folderbase)
                 if (fileinfo.Name.ToLower().Contains("sample"))
                 {
                     File.Delete(fileinfo.FullName);
-                    Console.WriteLine($"del   : {fileinfo.FullName}");
+                    Console.WriteLine($"del   : {fileinfo.Name}");
                     continue;
                 }
 
@@ -87,7 +87,7 @@ void Doreorg(string folderbase)
                 }
 
                 File.Move(fileinfo.FullName, newfile);
-                Console.WriteLine($"mov   : {fileinfo.FullName}\n        >> {newfile}");
+                Console.WriteLine($"mov   : {fileinfo.Name}\n        >> {newfile}");
             }
 
 
@@ -105,7 +105,7 @@ void Doreorg(string folderbase)
             if (filecount == 0)
             {
                 Directory.Delete(subdir.FullName, true);
-                Console.WriteLine($"deldir: {subdir.FullName}");
+                Console.WriteLine($"deldir: {subdir.Name}");
             }
 
         }
@@ -114,7 +114,7 @@ void Doreorg(string folderbase)
         if (filecount == 0)
         {
             Directory.Delete(folder.FullName, true);
-            Console.WriteLine($"deldir: {folder.FullName}");
+            Console.WriteLine($"deldir: {folder.Name}");
         }
 
 
