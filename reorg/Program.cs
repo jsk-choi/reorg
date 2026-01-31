@@ -86,8 +86,10 @@ void Doreorg(string folderbase)
                     ctr++;
                 }
 
-                File.Move(fileinfo.FullName, newfile);
-                Console.WriteLine($"mov   : {fileinfo.Name}\n        >> {newfile}");
+                if (File.Exists(fileinfo.FullName)) { 
+                    File.Move(fileinfo.FullName, newfile);
+                    Console.WriteLine($"mov   : {fileinfo.Name}\n        >> {newfile}");
+                }
             }
 
 
